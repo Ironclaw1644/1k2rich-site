@@ -344,6 +344,241 @@ strike {
 }
 
 /* ============================================================ */
+/* BUILD PHASE — paper trade history                              */
+/* ============================================================ */
+.phase {
+  max-width: var(--max);
+  width: 100%;
+  margin: 0 auto;
+  padding: clamp(40px, 6vw, 80px) var(--pad);
+  border-top: 1px solid var(--rule);
+}
+
+.phase__head {
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+.phase__label {
+  margin: 0 0 14px 0;
+}
+
+.phase__h {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -0.02em;
+  margin: 0 0 18px 0;
+}
+
+.phase__sub {
+  margin: 0 0 clamp(24px, 3vw, 32px) 0;
+  font-size: clamp(15px, 1.6vw, 17px);
+  line-height: 1.55;
+  color: var(--fg-2);
+  max-width: 64ch;
+}
+
+.phase__sub strong {
+  color: var(--fg);
+  font-weight: 500;
+}
+
+.phase__stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(12px, 2vw, 20px);
+  padding: clamp(16px, 2vw, 20px) 0;
+  border-top: 1px solid var(--rule-2);
+  border-bottom: 1px solid var(--rule-2);
+}
+
+.phase__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.phase__stat__val {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(16px, 2.2vw, 22px);
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.phase__stat__val--up { color: var(--fg); }
+.phase__stat__val--down { color: var(--fg-3); }
+
+@media (max-width: 720px) {
+  .phase__stats { grid-template-columns: repeat(3, 1fr); row-gap: 18px; }
+}
+@media (max-width: 420px) {
+  .phase__stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+.trades {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: trade-counter;
+}
+
+.trade {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  gap: clamp(16px, 3vw, 32px);
+  align-items: center;
+  padding: clamp(16px, 2vw, 22px) 0;
+  border-top: 1px solid var(--rule-2);
+}
+
+.trade:last-child {
+  border-bottom: 1px solid var(--rule-2);
+}
+
+.trade__date {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.trade__day {
+  font-family: var(--mono);
+  font-weight: 500;
+  font-size: clamp(20px, 2.4vw, 24px);
+  color: var(--fg);
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.trade__dt {
+  margin-top: 2px;
+}
+
+.trade__main {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.trade__head {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.trade__side {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  padding: 4px 10px;
+  border: 1px solid var(--fg);
+  color: var(--fg);
+  line-height: 1;
+}
+
+.trade__side--put {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.trade__side--call {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.trade__contract {
+  color: var(--fg-2);
+}
+
+.trade__exit {
+  margin-left: auto;
+  color: var(--fg-3);
+}
+
+.trade__note {
+  font-size: clamp(14px, 1.4vw, 15px);
+  line-height: 1.5;
+  color: var(--fg-2);
+  max-width: 64ch;
+}
+
+.trade__pnl {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-end;
+  font-variant-numeric: tabular-nums;
+}
+
+.trade__pnl__val {
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(20px, 2.4vw, 26px);
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+.trade__pnl__bank {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: var(--fg-3);
+  letter-spacing: 0.06em;
+}
+
+.trade--win .trade__pnl__val {
+  color: var(--fg);
+}
+
+.trade--loss .trade__pnl__val {
+  color: var(--fg-3);
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+
+.trade--worst .trade__pnl__val {
+  color: var(--fg-3);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--fg);
+}
+
+.trade--manual .trade__exit {
+  font-style: italic;
+}
+
+.phase__after {
+  margin: clamp(28px, 4vw, 40px) 0 0 0;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--fg-2);
+  max-width: 60ch;
+}
+
+.ws-nowrap { white-space: nowrap; }
+
+@media (max-width: 680px) {
+  .trade {
+    grid-template-columns: 56px 1fr;
+    grid-template-areas:
+      "date pnl"
+      "main main";
+    row-gap: 12px;
+  }
+  .trade__date { grid-area: date; }
+  .trade__pnl { grid-area: pnl; }
+  .trade__main { grid-area: main; }
+  .trade__exit { margin-left: 0; }
+}
+
+/* ============================================================ */
 /* SOON — roadmap stickers                                        */
 /* ============================================================ */
 .soon {
