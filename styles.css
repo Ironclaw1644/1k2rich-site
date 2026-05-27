@@ -34,13 +34,22 @@ html, body {
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* prevent iOS Safari from auto-scaling text on rotation */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
+  /* 100vh on iOS Safari includes the URL bar — use dvh for the visible viewport.
+     vh fallback for browsers without dvh support. */
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  /* respect iPhone notch / dynamic island */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 a {
@@ -139,13 +148,17 @@ strike {
 .wordmark {
   font-family: var(--serif);
   font-weight: 700;
-  font-size: clamp(72px, 18vw, 220px);
+  /* tighter clamp min so 1K/2RICH never overflows narrow phones */
+  font-size: clamp(56px, 17vw, 220px);
   line-height: 0.86;
   letter-spacing: -0.04em;
   margin: 0;
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
+  /* defense vs any kid of overflow */
+  word-break: break-word;
+  overflow-wrap: anywhere;
   gap: clamp(8px, 2vw, 24px);
 }
 
